@@ -2,6 +2,9 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import { BattleScreen } from './pages/battle';
+import { DeckScreen } from './pages/deck';
+import { ShopScreen } from './pages/shop';
 
 const Stack = createStackNavigator();
 
@@ -23,29 +26,7 @@ function HomeScreen({ navigation }) {
   );
 }
 
-function BattleScreen() {
-  return (
-    <View style={styles.container}>
-      <Text>Battle Screen</Text>
-    </View>
-  );
-}
 
-function DeckScreen() {
-  return (
-    <View style={styles.container}>
-      <Text>Deck Screen</Text>
-    </View>
-  );
-}
-
-function ShopScreen() {
-  return (
-    <View style={styles.container}>
-      <Text>Shop Screen</Text>
-    </View>
-  );
-}
 
 export default function App() {
   return (
