@@ -2,8 +2,6 @@
 
 
 
-
-
 class Card {
     private effectMap: Map<EffectTypes, (card: Card) => void> = new Map([
         [EffectTypes.VULNERABLE, this.onVulnerable.bind(this)],
@@ -12,7 +10,8 @@ class Card {
     ])
 
 
-    constructor(private name: string, 
+    constructor(private cardImagePath: string,
+                private name: string, 
                 private health: number, 
                 public attack1: Attack, 
                 public attack2: Attack, 
