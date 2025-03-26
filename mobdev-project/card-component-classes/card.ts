@@ -1,7 +1,10 @@
 
-
-
-
+enum CardTypes{
+    ALPHA,
+    BETA,
+    SIGMA,
+    OMEGA
+}
 
 
 class Card {
@@ -12,7 +15,9 @@ class Card {
     ])
 
 
-    constructor(private name: string, 
+    constructor(private cardImagePath: string,
+                private name: string, 
+                private type: CardTypes,
                 private health: number, 
                 public attack1: Attack, 
                 public attack2: Attack, 
