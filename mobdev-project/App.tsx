@@ -17,8 +17,8 @@ function HomeScreen({ navigation }) {
   });
 
   return (
-    
     <View style={styles.container}>
+      <Image source={require("./assets/LogoBlack.png")} style={styles.logo} alt={"deckless logo"}/>
       <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Battle')}>
         <Text style={styles.buttonText}>BATTLE</Text>
       </TouchableOpacity>
@@ -37,6 +37,7 @@ function HomeScreen({ navigation }) {
 export default function App() {
   return (
     <>
+
     <NavigationContainer>
       <Stack.Navigator screenOptions={{
         headerStyle: styles.stackStyle, 
@@ -84,6 +85,10 @@ const styles = StyleSheet.create({
 
   stackStyle: {
 
+  },
+
+  logo: {
+    justifyContent: 'center',
   },
 
   headerText: {

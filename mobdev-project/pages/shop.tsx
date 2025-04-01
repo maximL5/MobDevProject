@@ -5,7 +5,7 @@ export function ShopScreen() {
     return (
       <View style={styles.container}>
         <Text style={styles.coinsText} >(coin icon): 100000</Text>
-        <Text style={styles.shopText} >Shop resets in: 3 battles</Text>
+        <Text style={styles.shopText} >Shop resets in: {} battles</Text>
             <View style={styles.cardContainer} >
                 <View style={styles.cardRow}>
                     <Image source={require('../assets/cardplaceholder.jpg')} style={styles.card} />
