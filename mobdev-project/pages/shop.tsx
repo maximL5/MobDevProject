@@ -1,10 +1,20 @@
 import { StyleSheet, Text, TouchableOpacity, View, Image } from 'react-native';
+import { purchase } from '../shop-classes/shop';
+import { useState } from 'react';
+
+function AddToCart() {
+    const [card, selectCard] = useState("");
+}
+
+const coins = 0;
+const resetAmount = 0;
+const totalCost = 0;
 
 
 export function ShopScreen() {
     return (
       <View style={styles.container}>
-        <Text style={styles.coinsText} >(coin icon): 100000</Text>
+        <Text style={styles.coinsText} >Coins: {coins}</Text>
         <Text style={styles.shopText} >Shop resets in: {} battles</Text>
             <View style={styles.cardContainer} >
                 <View style={styles.cardRow}>
@@ -17,8 +27,13 @@ export function ShopScreen() {
                     <Image source={require('../assets/cardplaceholder.jpg')} style={styles.card} />
                 </View>
             </View>
+            <View>
+                <Text>
+                    Total: {totalCost}
+                </Text>
+            </View>
             <View style={styles.buttonCon}>
-                <TouchableOpacity style={styles.button}>
+                <TouchableOpacity style={styles.button} onPress={purchase} >
                     <Text>
                         Purchase
                     </Text>
@@ -26,7 +41,7 @@ export function ShopScreen() {
             </View>
       </View>
     );
-  }
+}
   
 
 
