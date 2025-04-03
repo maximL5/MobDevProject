@@ -1,10 +1,18 @@
-[
-    {
-        "img": "",
-        "name": "",
-        "health": ,
-        "atk": ,
-        "atk2": ,
-        "cost": ,
-    }
-]
+{ 
+    "cards": [
+        {
+            "cardImagePath": "../images/rizzler.png",
+            "name": "The Rizzler",
+            "type": "ALPHA",
+            "health": 20,
+            "attack1": { "name": "Pick Up Line", "damage": 3, "ability": "NONE" },
+            "attack2": { "name": "Unlimited Rizz", "damage": 1, "ability": "VULNERABLE" },
+            "attack3": null,
+            "damageScaler": 1,
+            "damageOverTime": 0,
+            "moveList": [{ "name": "Pick Up Line", "damage": 3, "ability": "NONE" }, { "name": "Unlimited Rizz", "damage": 1, "ability": "VULNERABLE" }],
+            "effectList": ["NONE", "VULNERABLE"],
+            "cost": 5
+        }
+    ]
+}

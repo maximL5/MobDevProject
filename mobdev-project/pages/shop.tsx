@@ -1,6 +1,7 @@
 import { StyleSheet, Text, TouchableOpacity, View, Image } from 'react-native';
 import { purchase } from '../shop-classes/shop';
 import { useState } from 'react';
+import cardsData from '../res/cards.json';
 
 function AddToCart() {
     const [card, selectCard] = useState("");
@@ -11,12 +12,14 @@ const resetAmount = 0;
 const totalCost = 0;
 
 
+
 export function ShopScreen() {
     return (
       <View style={styles.container}>
         <Text style={styles.coinsText} >Coins: {coins}</Text>
         <Text style={styles.shopText} >Shop resets in: {} battles</Text>
-            <View style={styles.cardContainer} >
+        <Shop></Shop>
+            {/* <View style={styles.cardContainer} >
                 <View style={styles.cardRow}>
                     <Image source={require('../assets/cardplaceholder.jpg')} style={styles.card} />
                     <Image source={require('../assets/cardplaceholder.jpg')} style={styles.card} />
@@ -38,10 +41,27 @@ export function ShopScreen() {
                         Purchase
                     </Text>
                 </TouchableOpacity>
-            </View>
+            </View> */}
       </View>
     );
 }
+
+const Shop: React.FC = () => {
+    return (
+      <View style={{ flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center' }}>
+        {cardsData.cards.map((card, index) => (
+          <View key={index} style={{ alignItems: 'center', margin: 10 }}>
+            <Image source={{ uri: card.cardImagePath }} style={{ width: 100, height: 140 }} />
+            <Text style={{ fontWeight: 'bold' }}>{card.name}</Text>
+            <Text>Type: {card.type}</Text>
+            <Text>Cost: {card.cost} coins</Text>
+          </View>
+        ))}
+      </View>
+    );
+  };
+  
+  
   
 
 
