@@ -1,4 +1,18 @@
 import { StyleSheet, Text, TouchableOpacity, View, Image } from 'react-native';
+import { useState } from 'react';
+import { imageMap, cardsData } from '../components/image-map';
+
+function AddToCart() {
+    const [card, selectCard] = useState("");
+}
+
+
+const coins = 0;
+const resetAmount = 0;
+const cardsDisplayed = 5;
+const totalCost = 0;
+
+
 
 
 export function ShopScreen() {

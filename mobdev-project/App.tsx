@@ -5,6 +5,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { BattleScreen } from './pages/battle';
 import { DeckScreen } from './pages/deck';
+import { CardsScreen } from './pages/cards';
 import { ShopScreen } from './pages/shop';
 
 const Stack = createStackNavigator();
@@ -24,6 +25,9 @@ function HomeScreen({ navigation }) {
       </TouchableOpacity>
       <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Deck')}>
         <Text style={styles.buttonText}>DECK</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Cards')}>
+        <Text style={styles.buttonText}>CARDS</Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Shop')}>
         <Text style={styles.buttonText}>SHOP</Text>
@@ -50,6 +54,7 @@ export default function App() {
         />
         <Stack.Screen name="Battle" component={BattleScreen} />
         <Stack.Screen name="Deck" component={DeckScreen} />
+        <Stack.Screen name="Cards" component={CardsScreen} />
         <Stack.Screen name="Shop" component={ShopScreen} />
       </Stack.Navigator>
     </NavigationContainer>

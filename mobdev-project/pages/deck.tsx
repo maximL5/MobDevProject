@@ -52,6 +52,14 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   button: {
+    borderColor: '#000',
+    borderWidth: 1,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 10,
+    marginTop: 20,
+  },
+  cardWrapper: {
     backgroundColor: '#fff',
     paddingVertical: 20,
     paddingHorizontal: 30,
