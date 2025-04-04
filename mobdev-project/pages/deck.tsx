@@ -1,7 +1,14 @@
 import { useState } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View, Image, FlatList, Alert } from 'react-native';
 
-// Dummy card data - replace with actual card data later
+type Card = {
+  id: string;
+  image: any; // or ImageSourcePropType if you want stricter typing
+  name: string;
+};
+
+
+// Dummy card data
 const dummyCards = [
   { id: '1', image: require('../assets/cardplaceholder.jpg'), name: 'Card A' },
   { id: '2', image: require('../assets/cardplaceholder.jpg'), name: 'Card B' },
@@ -18,27 +25,24 @@ export function DeckScreen() {
     if (selectedCards.includes(id)) {
       setSelectedCards(prev => prev.filter(cardId => cardId !== id));
     } else {
-      if (selectedCards.length >= 5) {
-        Alert.alert('Limit Reached', 'You can only select up to 5 cards.');
-        return;
-      }
+      if (selectedCards.length >= 5) return; // Block selection beyond 5
       setSelectedCards(prev => [...prev, id]);
     }
   };
 
   const confirmDeck = () => {
-    if (selectedCards.length < 1) {
-      Alert.alert('Select Cards', 'Please select at least one card to proceed.');
+    if (selectedCards.length !== 5) {
+      Alert.alert('Select 5 Cards', 'You must select exactly 5 cards to proceed.');
       return;
     }
 
-    Alert.alert('Deck Confirmed', `You selected ${selectedCards.length} card(s)!`);
-    // You could also store the deck in a global state here
+    Alert.alert('Deck Confirmed', 'Your battle deck is ready!');
+    // Save deck or navigate to next screen here
   };
 
-  const renderCard = ({ item }: { item: { id: string; image: any; name: string } }) => {
+  const renderCard = ({ item }: { item: Card }) => {
     const isSelected = selectedCards.includes(item.id);
-
+  
     return (
       <TouchableOpacity
         style={[styles.cardWrapper, isSelected && styles.selectedCard]}
@@ -48,11 +52,11 @@ export function DeckScreen() {
         <Text style={styles.cardName}>{item.name}</Text>
       </TouchableOpacity>
     );
-  };
+  };  
 
   return (
     <View style={styles.container}>
-      <Text style={styles.chooseText}>Select up to 5 cards</Text>
+      <Text style={styles.chooseText}>Pick exactly 5 cards for your deck</Text>
       <FlatList
         data={dummyCards}
         renderItem={renderCard}
@@ -60,9 +64,25 @@ export function DeckScreen() {
         numColumns={2}
         contentContainerStyle={styles.cardContainer}
       />
-      <Text style={styles.counterText}>Selected: {selectedCards.length}/5</Text>
-      <TouchableOpacity style={styles.confirmButton} onPress={confirmDeck}>
-        <Text style={styles.confirmText}>Confirm Deck</Text>
+      <Text style={styles.counterText}>
+        Selected: {selectedCards.length}/5
+      </Text>
+      <TouchableOpacity
+        style={[
+          styles.confirmButton,
+          selectedCards.length === 5 ? styles.confirmEnabled : styles.confirmDisabled,
+        ]}
+        onPress={confirmDeck}
+        disabled={selectedCards.length !== 5}
+      >
+        <Text
+          style={[
+            styles.confirmText,
+            selectedCards.length === 5 ? styles.confirmTextEnabled : styles.confirmTextDisabled,
+          ]}
+        >
+          Confirm Deck
+        </Text>
       </TouchableOpacity>
     </View>
   );
@@ -112,14 +132,25 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   confirmButton: {
-    backgroundColor: 'white',
     paddingVertical: 15,
     paddingHorizontal: 40,
     borderRadius: 20,
     marginTop: 20,
   },
+  confirmEnabled: {
+    backgroundColor: '#00FF7F',
+  },
+  confirmDisabled: {
+    backgroundColor: '#999',
+  },
   confirmText: {
     fontWeight: 'bold',
     fontSize: 18,
+  },
+  confirmTextEnabled: {
+    color: 'black',
+  },
+  confirmTextDisabled: {
+    color: '#444',
   },
 });
