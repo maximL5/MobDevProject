@@ -1,28 +1,70 @@
-import { StyleSheet, Text, TouchableOpacity, View, Image } from 'react-native';
+import { useState } from 'react';
+import { StyleSheet, Text, TouchableOpacity, View, Image, FlatList, Alert } from 'react-native';
+
+// Dummy card data - replace with actual card data later
+const dummyCards = [
+  { id: '1', image: require('../assets/cardplaceholder.jpg'), name: 'Card A' },
+  { id: '2', image: require('../assets/cardplaceholder.jpg'), name: 'Card B' },
+  { id: '3', image: require('../assets/cardplaceholder.jpg'), name: 'Card C' },
+  { id: '4', image: require('../assets/cardplaceholder.jpg'), name: 'Card D' },
+  { id: '5', image: require('../assets/cardplaceholder.jpg'), name: 'Card E' },
+  { id: '6', image: require('../assets/cardplaceholder.jpg'), name: 'Card F' },
+];
 
 export function DeckScreen() {
+  const [selectedCards, setSelectedCards] = useState<string[]>([]);
+
+  const toggleCardSelection = (id: string) => {
+    if (selectedCards.includes(id)) {
+      setSelectedCards(prev => prev.filter(cardId => cardId !== id));
+    } else {
+      if (selectedCards.length >= 5) {
+        Alert.alert('Limit Reached', 'You can only select up to 5 cards.');
+        return;
+      }
+      setSelectedCards(prev => [...prev, id]);
+    }
+  };
+
+  const confirmDeck = () => {
+    if (selectedCards.length < 1) {
+      Alert.alert('Select Cards', 'Please select at least one card to proceed.');
+      return;
+    }
+
+    Alert.alert('Deck Confirmed', `You selected ${selectedCards.length} card(s)!`);
+    // You could also store the deck in a global state here
+  };
+
+  const renderCard = ({ item }: { item: { id: string; image: any; name: string } }) => {
+    const isSelected = selectedCards.includes(item.id);
+
+    return (
+      <TouchableOpacity
+        style={[styles.cardWrapper, isSelected && styles.selectedCard]}
+        onPress={() => toggleCardSelection(item.id)}
+      >
+        <Image source={item.image} style={styles.deck} />
+        <Text style={styles.cardName}>{item.name}</Text>
+      </TouchableOpacity>
+    );
+  };
+
   return (
     <View style={styles.container}>
-      <Text style={styles.chooseText}>Choose a Deck</Text>
-      <View style={styles.cardContainer}>
-        <View style={styles.cardRow}>
-          <DeckButton />
-          <DeckButton />
-        </View>
-        <View style={styles.cardRow}>
-          <DeckButton />
-          <DeckButton />
-        </View>
-      </View>
+      <Text style={styles.chooseText}>Select up to 5 cards</Text>
+      <FlatList
+        data={dummyCards}
+        renderItem={renderCard}
+        keyExtractor={item => item.id}
+        numColumns={2}
+        contentContainerStyle={styles.cardContainer}
+      />
+      <Text style={styles.counterText}>Selected: {selectedCards.length}/5</Text>
+      <TouchableOpacity style={styles.confirmButton} onPress={confirmDeck}>
+        <Text style={styles.confirmText}>Confirm Deck</Text>
+      </TouchableOpacity>
     </View>
-  );
-}
-
-function DeckButton() {
-  return (
-    <TouchableOpacity style={styles.button}>
-      <Image source={require('../assets/cardplaceholder.jpg')} style={styles.deck} />
-    </TouchableOpacity>
   );
 }
 
@@ -31,36 +73,53 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#808080',
     alignItems: 'center',
-    justifyContent: 'center',
+    paddingTop: 60,
   },
   chooseText: {
-    position: 'absolute',
-    top: 10,
-    left: 10,
-    fontSize: 57,
+    fontSize: 24,
     color: 'white',
     fontWeight: 'bold',
-  },
-  cardContainer: {
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  cardRow: {
-    flexDirection: 'row',
-    gap: 10,
-    justifyContent: 'center',
     marginBottom: 10,
   },
-  button: {
+  cardContainer: {
+    paddingBottom: 20,
+    paddingHorizontal: 10,
+    justifyContent: 'center',
+  },
+  cardWrapper: {
     backgroundColor: '#fff',
-    paddingVertical: 20,
-    paddingHorizontal: 30,
+    padding: 10,
     borderRadius: 10,
-    marginTop: 50,
+    margin: 10,
+    alignItems: 'center',
+  },
+  selectedCard: {
+    borderWidth: 3,
+    borderColor: 'gold',
   },
   deck: {
-    height: 180,
-    width: 120,
+    height: 150,
+    width: 100,
     borderRadius: 10,
+  },
+  cardName: {
+    marginTop: 5,
+    fontWeight: 'bold',
+  },
+  counterText: {
+    fontSize: 16,
+    color: 'white',
+    marginTop: 10,
+  },
+  confirmButton: {
+    backgroundColor: 'white',
+    paddingVertical: 15,
+    paddingHorizontal: 40,
+    borderRadius: 20,
+    marginTop: 20,
+  },
+  confirmText: {
+    fontWeight: 'bold',
+    fontSize: 18,
   },
 });
