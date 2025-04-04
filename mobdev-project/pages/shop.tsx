@@ -18,36 +18,41 @@ const totalCost = 0;
 export function ShopScreen() {
     return (
       <View style={styles.container}>
-        <Text style={styles.coinsText} >(coin icon): 100000</Text>
-        <Text style={styles.shopText} >Shop resets in: {} battles</Text>
-            <View style={styles.cardContainer} >
-                <View style={styles.cardRow}>
-                    <Image source={require('../assets/cardplaceholder.jpg')} style={styles.card} />
-                    <Image source={require('../assets/cardplaceholder.jpg')} style={styles.card} />
-                    <Image source={require('../assets/cardplaceholder.jpg')} style={styles.card} />
-                </View>
-                <View style={styles.cardRow}>
-                    <Image source={require('../assets/cardplaceholder.jpg')} style={styles.card} />
-                    <Image source={require('../assets/cardplaceholder.jpg')} style={styles.card} />
-                </View>
-            </View>
-            <View style={styles.buttonCon}>
-                <TouchableOpacity style={styles.button}>
-                    <Text>
-                        Purchase
-                    </Text>
-                </TouchableOpacity>
-            </View>
+        <Text style={styles.coinsText} >Coins: {coins}</Text>
+        <Text style={styles.shopText} >Shop resets in: {resetAmount} battles</Text>
+        <Shop></Shop>
       </View>
     );
-  }
-  
+}
 
+const Shop: React.FC = () => {
+    //hard coded to only display 4 cards for now
+    const visibleCards = cardsData.slice(0, 5);
+    return (
+        <View style={styles.cardRow}>
+          {visibleCards.map((card, index) => (
+            <View key={index} style={{ alignItems: 'center', margin: 10 }}>
+              <Image source={imageMap[card.cardImagePath]} style={styles.card} />
+              <Text style={{ fontWeight: 'bold' }}>{card.name}</Text>
+              <Text>Type: {card.type}</Text>
+              <Text>Cost: {card.cost} coins</Text>
+            </View>
+          ))}
+          <TouchableOpacity style={styles.buttonCon} >
+            <Text style={styles.button} >
+                Purchase
+            </Text>
+          </TouchableOpacity>
+        </View>
+      );
+  };
+  
+  
 
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: '#808080',
+      backgroundColor: '#D3D3D3',
       alignItems: 'center',  
       justifyContent: 'center', 
     },
@@ -66,7 +71,7 @@ const styles = StyleSheet.create({
         paddingVertical: 20,
         paddingHorizontal: 30,
         borderRadius: 10,
-        marginTop: 50,
+        marginTop: 10,
     },
 
     buttonCon: {
@@ -89,9 +94,8 @@ const styles = StyleSheet.create({
 
     cardRow: {
         flexDirection: 'row', 
-        gap: 10,
-        justifyContent: 'center',
-        marginBottom: 10, 
+        flexWrap: 'wrap', 
+        justifyContent: 'center' 
     },
     
     cardContainer: {
@@ -100,8 +104,7 @@ const styles = StyleSheet.create({
     },
 
     card: {
-        height: 180,
-        width: 120,
-        borderRadius: 10,
+        height: 165,
+        width: 110,
     }
   });
