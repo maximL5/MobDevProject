@@ -1,74 +1,64 @@
 import { StyleSheet, Text, TouchableOpacity, View, Image } from 'react-native';
 import { purchase } from '../shop-classes/shop';
 import { useState } from 'react';
-import cardsData from '../res/cards.json';
+import cardsList from '../res/cards.json';
+import { Fredoka_400Regular } from '@expo-google-fonts/fredoka';
 
 function AddToCart() {
     const [card, selectCard] = useState("");
 }
 
+const cardsData = cardsList.cards;
 const coins = 0;
 const resetAmount = 0;
+const cardsDisplayed = 5;
 const totalCost = 0;
 
+const imageMap: Record<string, any> = {
+    "rizzler.png": require("../assets/images/rizzler.png")
+    // Add all 12 images here
+  };
+  
 
 
 export function ShopScreen() {
     return (
       <View style={styles.container}>
         <Text style={styles.coinsText} >Coins: {coins}</Text>
-        <Text style={styles.shopText} >Shop resets in: {} battles</Text>
+        <Text style={styles.shopText} >Shop resets in: {resetAmount} battles</Text>
         <Shop></Shop>
-            {/* <View style={styles.cardContainer} >
-                <View style={styles.cardRow}>
-                    <Image source={require('../assets/cardplaceholder.jpg')} style={styles.card} />
-                    <Image source={require('../assets/cardplaceholder.jpg')} style={styles.card} />
-                    <Image source={require('../assets/cardplaceholder.jpg')} style={styles.card} />
-                </View>
-                <View style={styles.cardRow}>
-                    <Image source={require('../assets/cardplaceholder.jpg')} style={styles.card} />
-                    <Image source={require('../assets/cardplaceholder.jpg')} style={styles.card} />
-                </View>
-            </View>
-            <View>
-                <Text>
-                    Total: {totalCost}
-                </Text>
-            </View>
-            <View style={styles.buttonCon}>
-                <TouchableOpacity style={styles.button} onPress={purchase} >
-                    <Text>
-                        Purchase
-                    </Text>
-                </TouchableOpacity>
-            </View> */}
       </View>
     );
 }
 
 const Shop: React.FC = () => {
+    //hard coded to only display 4 cards for now
+    const visibleCards = cardsData.slice(0, 5);
     return (
-      <View style={{ flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center' }}>
-        {cardsData.cards.map((card, index) => (
-          <View key={index} style={{ alignItems: 'center', margin: 10 }}>
-            <Image source={{ uri: card.cardImagePath }} style={{ width: 100, height: 140 }} />
-            <Text style={{ fontWeight: 'bold' }}>{card.name}</Text>
-            <Text>Type: {card.type}</Text>
-            <Text>Cost: {card.cost} coins</Text>
-          </View>
-        ))}
-      </View>
-    );
+        <View style={styles.cardRow}>
+          {visibleCards.map((card, index) => (
+            <View key={index} style={{ alignItems: 'center', margin: 10 }}>
+              <Image source={imageMap[card.cardImagePath]} style={styles.card} />
+              <Text style={{ fontWeight: 'bold' }}>{card.name}</Text>
+              <Text>Type: {card.type}</Text>
+              <Text>Cost: {card.cost} coins</Text>
+            </View>
+          ))}
+          <TouchableOpacity style={styles.buttonCon} >
+            <Text style={styles.button} >
+                Purchase
+            </Text>
+          </TouchableOpacity>
+        </View>
+      );
   };
   
   
-  
-
 
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: '#808080',
+      backgroundColor: '#D3D3D3',
       alignItems: 'center',  
       justifyContent: 'center', 
     },
@@ -87,7 +77,7 @@ const styles = StyleSheet.create({
         paddingVertical: 20,
         paddingHorizontal: 30,
         borderRadius: 10,
-        marginTop: 50,
+        marginTop: 10,
     },
 
     buttonCon: {
@@ -110,9 +100,8 @@ const styles = StyleSheet.create({
 
     cardRow: {
         flexDirection: 'row', 
-        gap: 10,
-        justifyContent: 'center',
-        marginBottom: 10, 
+        flexWrap: 'wrap', 
+        justifyContent: 'center' 
     },
     
     cardContainer: {
@@ -121,8 +110,7 @@ const styles = StyleSheet.create({
     },
 
     card: {
-        height: 180,
-        width: 120,
-        borderRadius: 10,
+        height: 165,
+        width: 110,
     }
   });
