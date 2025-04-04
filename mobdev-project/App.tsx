@@ -37,7 +37,6 @@ function HomeScreen({ navigation }) {
 export default function App() {
   return (
     <>
-
     <NavigationContainer>
       <Stack.Navigator screenOptions={{
         headerStyle: styles.stackStyle, 

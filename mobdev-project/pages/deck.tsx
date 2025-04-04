@@ -84,14 +84,18 @@ export function DeckScreen() {
           Confirm Deck
         </Text>
       </TouchableOpacity>
+
     </View>
   );
 }
 
+
+
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#808080',
+    backgroundColor: '#fff',
     alignItems: 'center',
     paddingTop: 60,
   },
@@ -106,6 +110,21 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     justifyContent: 'center',
   },
+
+  cardRow: {
+    flexDirection: 'row',
+    gap: 10,
+    justifyContent: 'center',
+    marginBottom: 10,
+  },
+  button: {
+    borderColor: '#000',
+    borderWidth: 1,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 10,
+    marginTop: 20,
+
   cardWrapper: {
     backgroundColor: '#fff',
     padding: 10,
