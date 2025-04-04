@@ -5,6 +5,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { BattleScreen } from './pages/battle';
 import { DeckScreen } from './pages/deck';
+import { CardsScreen } from './pages/cards';
 import { ShopScreen } from './pages/shop';
 import { CardsScreen } from './pages/cards';
 

@@ -1,5 +1,5 @@
 import { StyleSheet, Text, TouchableOpacity, View, Image, ScrollView } from 'react-native';
-import { imageMap, cardsData } from '../shop-classes/image-map';
+import { imageMap, cardsData } from '../components/image-map';
 
 export const CardsScreen: React.FC = () => {
     return (

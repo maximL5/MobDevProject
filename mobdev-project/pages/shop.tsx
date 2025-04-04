@@ -1,8 +1,6 @@
 import { StyleSheet, Text, TouchableOpacity, View, Image } from 'react-native';
-import { purchase } from '../shop-classes/shop';
 import { useState } from 'react';
-import cardsList from '../res/cards.json';
-import { imageMap, cardsData } from '../shop-classes/image-map';
+import { imageMap, cardsData } from '../components/image-map';
 
 function AddToCart() {
     const [card, selectCard] = useState("");
