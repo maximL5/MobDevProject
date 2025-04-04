@@ -124,7 +124,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     borderRadius: 10,
     marginTop: 20,
-
+  },
   cardWrapper: {
     backgroundColor: '#fff',
     padding: 10,
