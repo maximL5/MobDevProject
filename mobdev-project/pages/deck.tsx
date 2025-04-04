@@ -1,20 +1,45 @@
 import { StyleSheet, Text, TouchableOpacity, View, Image } from 'react-native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { CardsScreen } from './cards';
+
+const DeckStack = createStackNavigator();
+
+const Stack = createStackNavigator();
+
+function DeckMain({ navigation }) {
+  return (
+    <View style={styles.container}>
+      <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Card')}>
+        <Text>VIEW CARDS</Text>
+      </TouchableOpacity>
+      
+      <View style={styles.cardContainer}>
+          <View style={styles.cardRow}>
+            <DeckButton />
+            <DeckButton />
+          </View>
+          <View style={styles.cardRow}>
+            <DeckButton />
+            <DeckButton />
+          </View>
+      </View>
+    </View>
+  );
+}
 
 export function DeckScreen() {
   return (
-    <View style={styles.container}>
-      <Text style={styles.chooseText}>Choose a Deck</Text>
-      <View style={styles.cardContainer}>
-        <View style={styles.cardRow}>
-          <DeckButton />
-          <DeckButton />
-        </View>
-        <View style={styles.cardRow}>
-          <DeckButton />
-          <DeckButton />
-        </View>
-      </View>
-    </View>
+    <Stack.Navigator>
+      <Stack.Screen 
+        name="DeckMain" 
+        component={DeckMain}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen 
+        name="Card" 
+        component={CardsScreen}
+      />
+    </Stack.Navigator>
   );
 }
 
@@ -29,7 +54,7 @@ function DeckButton() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#808080',
+    backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -52,11 +77,12 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   button: {
-    backgroundColor: '#fff',
-    paddingVertical: 20,
-    paddingHorizontal: 30,
+    borderColor: '#000',
+    borderWidth: 1,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
     borderRadius: 10,
-    marginTop: 50,
+    marginTop: 20,
   },
   deck: {
     height: 180,

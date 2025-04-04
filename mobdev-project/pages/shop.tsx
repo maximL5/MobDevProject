@@ -2,23 +2,19 @@ import { StyleSheet, Text, TouchableOpacity, View, Image } from 'react-native';
 import { purchase } from '../shop-classes/shop';
 import { useState } from 'react';
 import cardsList from '../res/cards.json';
-import { Fredoka_400Regular } from '@expo-google-fonts/fredoka';
+import { imageMap, cardsData } from '../shop-classes/image-map';
 
 function AddToCart() {
     const [card, selectCard] = useState("");
 }
 
-const cardsData = cardsList.cards;
+
 const coins = 0;
 const resetAmount = 0;
 const cardsDisplayed = 5;
 const totalCost = 0;
 
-const imageMap: Record<string, any> = {
-    "rizzler.png": require("../assets/images/rizzler.png")
-    // Add all 12 images here
-  };
-  
+
 
 
 export function ShopScreen() {
