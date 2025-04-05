@@ -1,48 +1,72 @@
-import { useState } from 'react';
-import { StyleSheet, Text, TouchableOpacity, View, Image, FlatList, Alert } from 'react-native';
+import { useState, useEffect } from 'react';
+import {
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+  Image,
+  FlatList,
+  Alert,
+} from 'react-native';
+
+import { imageMap, ownedCardsData } from '../components/image-map';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 
 type Card = {
   id: string;
-  image: any; // or ImageSourcePropType if you want stricter typing
+  image: any;
   name: string;
 };
 
 
-// Dummy card data
-const dummyCards = [
-  { id: '1', image: require('../assets/cardplaceholder.jpg'), name: 'Card A' },
-  { id: '2', image: require('../assets/cardplaceholder.jpg'), name: 'Card B' },
-  { id: '3', image: require('../assets/cardplaceholder.jpg'), name: 'Card C' },
-  { id: '4', image: require('../assets/cardplaceholder.jpg'), name: 'Card D' },
-  { id: '5', image: require('../assets/cardplaceholder.jpg'), name: 'Card E' },
-  { id: '6', image: require('../assets/cardplaceholder.jpg'), name: 'Card F' },
-];
-
 export function DeckScreen() {
   const [selectedCards, setSelectedCards] = useState<string[]>([]);
+  const [cards, setCards] = useState<Card[]>([]);
+  const [savedDeck, setSavedDeck] = useState<Card[] | null>(null);
+
+  
+  useEffect(() => {
+    const mappedCards: Card[] = ownedCardsData.map((card, index) => ({
+      id: index.toString(),
+      name: card.name,
+      image: imageMap[card.cardImagePath] || require('../assets/cardplaceholder.jpg'),
+    }));
+
+    setCards(mappedCards);
+  }, []);
 
   const toggleCardSelection = (id: string) => {
-    if (selectedCards.includes(id)) {
-      setSelectedCards(prev => prev.filter(cardId => cardId !== id));
-    } else {
-      if (selectedCards.length >= 5) return; // Block selection beyond 5
-      setSelectedCards(prev => [...prev, id]);
-    }
+    setSelectedCards((prev) =>
+      prev.includes(id)
+        ? prev.filter((cardId) => cardId !== id)
+        : prev.length < 5
+        ? [...prev, id]
+        : prev
+    );
   };
 
-  const confirmDeck = () => {
+  const confirmDeck = async () => {
     if (selectedCards.length !== 5) {
       Alert.alert('Select 5 Cards', 'You must select exactly 5 cards to proceed.');
       return;
     }
-
-    Alert.alert('Deck Confirmed', 'Your battle deck is ready!');
-    // Save deck or navigate to next screen here
+  
+    const selectedDeck = cards.filter(card => selectedCards.includes(card.id));
+    setSavedDeck(selectedDeck);
+  
+    try {
+      await AsyncStorage.setItem('savedDeck', JSON.stringify(selectedDeck));
+      Alert.alert('Deck Confirmed', 'Your battle deck is ready!');
+      console.log('Deck saved to storage.');
+    } catch (e) {
+      console.error('Failed to save the deck:', e);
+    }
   };
 
   const renderCard = ({ item }: { item: Card }) => {
     const isSelected = selectedCards.includes(item.id);
-  
+
     return (
       <TouchableOpacity
         style={[styles.cardWrapper, isSelected && styles.selectedCard]}
@@ -52,15 +76,15 @@ export function DeckScreen() {
         <Text style={styles.cardName}>{item.name}</Text>
       </TouchableOpacity>
     );
-  };  
+  };
 
   return (
     <View style={styles.container}>
       <Text style={styles.chooseText}>Pick exactly 5 cards for your deck</Text>
       <FlatList
-        data={dummyCards}
+        data={cards}
         renderItem={renderCard}
-        keyExtractor={item => item.id}
+        keyExtractor={(item) => item.id}
         numColumns={2}
         contentContainerStyle={styles.cardContainer}
       />
@@ -84,10 +108,10 @@ export function DeckScreen() {
           Confirm Deck
         </Text>
       </TouchableOpacity>
-
     </View>
   );
 }
+
 
 
 

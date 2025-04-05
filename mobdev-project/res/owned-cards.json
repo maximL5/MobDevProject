@@ -1,0 +1,95 @@
+{ 
+    "ownedCards": [
+        {
+            "cardImagePath": "oiia.png",
+            "name": "OIIA OIIA",
+            "type": "BETA",
+            "health": 25,
+            "attack1": { "name": "OIIA", "damage": 5, "ability": "NONE" },
+            "attack2": { "name": "OIIAI OIIIAI", "damage": 2, "ability": "VULNERABLE" },
+            "attack3": null,
+            "damageScaler": 1,
+            "damageOverTime": 0,
+            "moveList": [],
+            "effectList": []
+        },
+        {
+            "cardImagePath": "street.png",
+            "name": "STREET INTERVIEWER",
+            "type": "OMEGA",
+            "health": 10,
+            "attack1": { "name": "WOULD YOU RATHER", "damage": 7, "ability": "NONE" },
+            "attack2": { "name": "ULTIMATE PUBLIC NUISANCE", "damage": 5, "ability": "POISON" },
+            "attack3": null,
+            "damageScaler": 1,
+            "damageOverTime": 0,
+            "moveList": [],
+            "effectList": []
+        },
+        {
+            "cardImagePath": "fortni.png",
+            "name": "FORTNI",
+            "type": "BETA",
+            "health": 25,
+            "attack1": { "name": "BATTLEPASS", "damage": 5, "ability": "NONE" },
+            "attack2": { "name": "VICTORY ROYALE", "damage": 2, "ability": "POISON" },
+            "attack3": null,
+            "damageScaler": 1,
+            "damageOverTime": 0,
+            "moveList": [],
+            "effectList": []
+        },
+        {
+            "cardImagePath": "smite.png",
+            "name": "SMITE KNIFE",
+            "type": "ALPHA",
+            "health": 40,
+            "attack1": { "name": "GET SMITED", "damage": 10, "ability": "NONE" },
+            "attack2": null,
+            "attack3": null,
+            "damageScaler": 1,
+            "damageOverTime": 0,
+            "moveList": [],
+            "effectList": []
+        },
+        {
+            "cardImagePath": "chill.png",
+            "name": "CHILL GUY",
+            "type": "SIGMA",
+            "health": 20,
+            "attack1": { "name": "*insert piano melody*", "damage": 6, "ability": "NONE" },
+            "attack2": { "name": "HE LOWKEY DONT GAF", "damage": 3, "ability": "VULNERABLE" },
+            "attack3": null,
+            "damageScaler": 1,
+            "damageOverTime": 0,
+            "moveList": [],
+            "effectList": []
+        },
+        {
+            "cardImagePath": "giga.png",
+            "name": "GIGACHAD",
+            "type": "ALPHA",
+            "health": 30,
+            "attack1": { "name": "MOG", "damage": 5, "ability": "NONE" },
+            "attack2": { "name": "LOOKSMAXX", "damage": 0, "ability": "VULNERABLE" },
+            "attack3": null,
+            "damageScaler": 1,
+            "damageOverTime": 0,
+            "moveList": [],
+            "effectList": []
+        },
+        {
+            "cardImagePath": "elite.png",
+            "name": "ELITE EMPLOYEE",
+            "type": "OMEGA",
+            "health": 30,
+            "attack1": { "name": "PROMOTION", "damage": 0, "ability": "NONE" },
+            "attack2": null,
+            "attack3": null,
+            "damageScaler": 1,
+            "damageOverTime": 0,
+            "moveList": [],
+            "effectList": []
+        }
+    ]
+}

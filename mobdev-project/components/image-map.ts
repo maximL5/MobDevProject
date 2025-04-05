@@ -1,6 +1,8 @@
 import cardsList from '../res/cards.json';
+import ownedCardsList from '../res/owned-cards.json';
 
 export const cardsData = cardsList.cards;
+export const ownedCardsData = ownedCardsList.ownedCards;
 
 export const imageMap: Record<string, any> = {
     "rizzler.png": require("../assets/images/rizzler.png"),

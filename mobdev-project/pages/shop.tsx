@@ -2,6 +2,7 @@ import { StyleSheet, Text, TouchableOpacity, View, Image } from 'react-native';
 import { useState } from 'react';
 import { imageMap, cardsData } from '../components/image-map';
 
+
 function AddToCart() {
     const [card, selectCard] = useState("");
 }
