@@ -7,6 +7,8 @@ export enum CardTypes{
 }
 
 
+const dog = CardTypes.ALPHA
+
 export class Card {
     private effectMap: Map<EffectTypes, (card: Card) => void> = new Map([
         [EffectTypes.VULNERABLE, this.onVulnerable.bind(this)],
