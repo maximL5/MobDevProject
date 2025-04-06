@@ -1,34 +1,40 @@
+import { useFonts } from 'expo-font';
+import { Fredoka_400Regular, Fredoka_500Medium, Fredoka_700Bold } from '@expo-google-fonts/fredoka';
 import { StyleSheet, Text, TouchableOpacity, View, Image } from 'react-native';
 import { useState } from 'react';
 import { imageMap, cardsData } from '../components/image-map';
 
 
-function AddToCart() {
-    const [card, selectCard] = useState("");
-}
-
-
 const coins = 0;
 const resetAmount = 0;
-const cardsDisplayed = 5;
 const totalCost = 0;
 
 
 
 
 export function ShopScreen() {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.coinsText} >Coins: {coins}</Text>
-        <Text style={styles.shopText} >Shop resets in: {resetAmount} battles</Text>
-        <Shop></Shop>
-      </View>
-    );
+  useFonts({
+    FredokaRegular: Fredoka_400Regular,
+    FredokaMedium: Fredoka_500Medium,
+    FredokaBold: Fredoka_700Bold,
+  });
+
+
+  return (
+    <View style={styles.container}>
+      <Text style={styles.coinsText} >Coins: {coins}</Text>
+      <Text style={styles.shopText} >Shop resets in: {resetAmount} battles</Text>
+      <Shop></Shop>
+    </View>
+  );
 }
 
 const Shop: React.FC = () => {
     //hard coded to only display 4 cards for now
     const visibleCards = cardsData.slice(0, 5);
+
+
+
     return (
         <View style={styles.cardRow}>
           {visibleCards.map((card, index) => (
@@ -39,11 +45,14 @@ const Shop: React.FC = () => {
               <Text>Cost: {card.cost} coins</Text>
             </View>
           ))}
-          <TouchableOpacity style={styles.buttonCon} >
-            <Text style={styles.button} >
-                Purchase
-            </Text>
-          </TouchableOpacity>
+          <View>
+            <Text style={styles.coinsText} >Total: {totalCost} </Text>
+            <TouchableOpacity style={styles.buttonCon} >
+              <Text style={styles.button} >
+                  PURCHASE
+              </Text>
+            </TouchableOpacity>
+          </View>
         </View>
       );
   };
@@ -53,26 +62,28 @@ const Shop: React.FC = () => {
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: '#D3D3D3',
+      backgroundColor: '#fff',
       alignItems: 'center',  
       justifyContent: 'center', 
     },
 
     shopText: {
+        fontFamily: 'FredokaRegular',
         position: 'absolute', 
         top: 10, 
         right: 10, 
         fontSize: 16,
-        color: 'white',
-        fontWeight: 'bold',
+        color: 'black',
     },
 
     button: {
-        backgroundColor: '#fff',
+      fontFamily: 'FredokaRegular',
+        backgroundColor: '#000',
         paddingVertical: 20,
         paddingHorizontal: 30,
-        borderRadius: 10,
+        borderRadius: 20,
         marginTop: 10,
+        color: 'white'
     },
 
     buttonCon: {
@@ -85,12 +96,12 @@ const styles = StyleSheet.create({
     },
 
     coinsText: {
+        fontFamily: 'FredokaMedium',
         position: 'absolute', 
         top: 10, 
         left: 10,
         fontSize: 16,
-        color: 'white',
-        fontWeight: 'bold',
+        color: 'black',
     },
 
     cardRow: {

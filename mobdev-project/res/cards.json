@@ -81,7 +81,8 @@
             "damageScaler": 1,
             "damageOverTime": 0,
             "moveList": [],
-            "effectList": []
+            "effectList": [],
+            "cost": 5
         },
         {
             "cardImagePath": "street.png",
@@ -94,7 +95,8 @@
             "damageScaler": 1,
             "damageOverTime": 0,
             "moveList": [],
-            "effectList": []
+            "effectList": [],
+            "cost": 5
         },
         {
             "cardImagePath": "fortni.png",
@@ -107,7 +109,8 @@
             "damageScaler": 1,
             "damageOverTime": 0,
             "moveList": [],
-            "effectList": []
+            "effectList": [],
+            "cost": 5
         },
         {
             "cardImagePath": "smite.png",
@@ -120,7 +123,8 @@
             "damageScaler": 1,
             "damageOverTime": 0,
             "moveList": [],
-            "effectList": []
+            "effectList": [],
+            "cost": 5
         },
         {
             "cardImagePath": "chill.png",
@@ -133,7 +137,8 @@
             "damageScaler": 1,
             "damageOverTime": 0,
             "moveList": [],
-            "effectList": []
+            "effectList": [],
+            "cost": 5
         },
         {
             "cardImagePath": "giga.png",
@@ -146,7 +151,8 @@
             "damageScaler": 1,
             "damageOverTime": 0,
             "moveList": [],
-            "effectList": []
+            "effectList": [],
+            "cost": 5
         },
         {
             "cardImagePath": "elite.png",
@@ -159,7 +165,8 @@
             "damageScaler": 1,
             "damageOverTime": 0,
             "moveList": [],
-            "effectList": []
+            "effectList": [],
+            "cost": 5
         }
     ]
 }

@@ -1,5 +1,5 @@
 
-enum CardTypes{
+export enum CardTypes{
     ALPHA,
     BETA,
     SIGMA,
@@ -7,7 +7,7 @@ enum CardTypes{
 }
 
 
-class Card {
+export class Card {
     private effectMap: Map<EffectTypes, (card: Card) => void> = new Map([
         [EffectTypes.VULNERABLE, this.onVulnerable.bind(this)],
         [EffectTypes.POISON, this.onPoison.bind(this)],
@@ -15,10 +15,10 @@ class Card {
     ])
 
 
-    constructor(private cardImagePath: string,
-                private name: string, 
-                private type: CardTypes,
-                private health: number, 
+    constructor(public cardImagePath: string,
+                public name: string, 
+                public type: CardTypes,
+                public health: number, 
                 public attack1: Attack, 
                 public attack2: Attack, 
                 public attack3: Attack | null = null, 

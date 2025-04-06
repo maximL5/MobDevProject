@@ -3,6 +3,7 @@ import { Fredoka_400Regular, Fredoka_500Medium, Fredoka_700Bold } from '@expo-go
 import { StyleSheet, Text, TouchableOpacity, View, Image } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import { SignInScreen } from './pages/sign-in';
 import { BattleScreen } from './pages/battle';
 import { DeckScreen } from './pages/deck';
 import { CardsScreen } from './pages/cards';
@@ -10,16 +11,24 @@ import { ShopScreen } from './pages/shop';
 
 const Stack = createStackNavigator();
 
-function HomeScreen({ navigation }) {
+
+function HomeScreen({ navigation, route }: { navigation: any; route: any }) {
   useFonts({
     FredokaRegular: Fredoka_400Regular,
     FredokaMedium: Fredoka_500Medium,
     FredokaBold: Fredoka_700Bold,
   });
 
+  const username = route.params?.username ?? "Stranger";
+
+
   return (
+    <View style={{ flex: 1, backgroundColor: 'white' }}>
+    <Text style={styles.text} >
+      Welcome, {username}
+    </Text>
     <View style={styles.container}>
-      <Image source={require("./assets/LogoBlack.png")} style={styles.logo} alt={"deckless logo"}/>
+      <Image source={require("./assets/logo-black.png")} style={styles.logo} alt={"deckless logo"}/>
       <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Battle')}>
         <Text style={styles.buttonText}>BATTLE</Text>
       </TouchableOpacity>
@@ -33,6 +42,7 @@ function HomeScreen({ navigation }) {
         <Text style={styles.buttonText}>SHOP</Text>
       </TouchableOpacity>
     </View>
+    </View>
   );
 }
 
@@ -40,12 +50,19 @@ function HomeScreen({ navigation }) {
 
 export default function App() {
   return (
-    <>
+    <View style={{ flex: 1, backgroundColor: 'white' }}>
     <NavigationContainer>
       <Stack.Navigator screenOptions={{
-        headerStyle: styles.stackStyle, 
-        headerTitleStyle: styles.headerText, 
+        headerStyle: {
+          backgroundColor: 'white', 
+          elevation: 0, 
+        },
       }}>
+        <Stack.Screen 
+          name="SignIn" 
+          component={SignInScreen} 
+          options={{ headerShown: false }} 
+        />
         <Stack.Screen 
           name="Home" 
           component={HomeScreen} 
@@ -57,16 +74,16 @@ export default function App() {
         <Stack.Screen name="Shop" component={ShopScreen} />
       </Stack.Navigator>
     </NavigationContainer>
-    </>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
     alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: '#fff',
+    marginTop: 100,
   },
 
   button: {
@@ -87,16 +104,15 @@ const styles = StyleSheet.create({
     fontFamily: 'FredokaRegular',
   },
 
-  stackStyle: {
-
-  },
-
   logo: {
     justifyContent: 'center',
   },
 
-  headerText: {
-
+  text: {
+    fontSize: 20,
+    fontFamily: 'FredokaRegular',
+    marginLeft: 20,
+    marginTop: 50,
   },
   
 });

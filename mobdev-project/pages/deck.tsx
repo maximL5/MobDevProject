@@ -1,3 +1,5 @@
+import { useFonts } from 'expo-font';
+import { Fredoka_400Regular, Fredoka_500Medium, Fredoka_700Bold } from '@expo-google-fonts/fredoka';
 import { useState, useEffect } from 'react';
 import {
   StyleSheet,
@@ -21,6 +23,12 @@ type Card = {
 
 
 export function DeckScreen() {
+  useFonts({
+      FredokaRegular: Fredoka_400Regular,
+      FredokaMedium: Fredoka_500Medium,
+      FredokaBold: Fredoka_700Bold,
+  });
+
   const [selectedCards, setSelectedCards] = useState<string[]>([]);
   const [cards, setCards] = useState<Card[]>([]);
   const [savedDeck, setSavedDeck] = useState<Card[] | null>(null);
@@ -121,12 +129,12 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
-    paddingTop: 60,
+    paddingTop: 10,
   },
   chooseText: {
+    fontFamily: 'FredokaRegular',
     fontSize: 24,
-    color: 'white',
-    fontWeight: 'bold',
+    color: 'black',
     marginBottom: 10,
   },
   cardContainer: {
@@ -134,7 +142,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     justifyContent: 'center',
   },
-
   cardRow: {
     flexDirection: 'row',
     gap: 10,
@@ -153,23 +160,24 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     padding: 10,
     borderRadius: 10,
-    margin: 10,
+    margin: 5,
     alignItems: 'center',
   },
   selectedCard: {
-    borderWidth: 3,
-    borderColor: 'gold',
+    borderWidth: 2,
+    borderColor: 'black',
   },
   deck: {
-    height: 150,
-    width: 100,
+    height: 200,
+    width: 130,
     borderRadius: 10,
   },
   cardName: {
+    fontFamily: 'FredokaMedium',
     marginTop: 5,
-    fontWeight: 'bold',
   },
   counterText: {
+    fontFamily: 'FredokaRegular',
     fontSize: 16,
     color: 'white',
     marginTop: 10,
@@ -178,20 +186,22 @@ const styles = StyleSheet.create({
     paddingVertical: 15,
     paddingHorizontal: 40,
     borderRadius: 20,
-    marginTop: 20,
+    marginTop: 10,
+    marginBottom: 40,
   },
   confirmEnabled: {
-    backgroundColor: '#00FF7F',
+    backgroundColor: '#000',
   },
   confirmDisabled: {
     backgroundColor: '#999',
   },
   confirmText: {
+    fontFamily: 'FredokaRegular',
     fontWeight: 'bold',
     fontSize: 18,
   },
   confirmTextEnabled: {
-    color: 'black',
+    color: 'white',
   },
   confirmTextDisabled: {
     color: '#444',
