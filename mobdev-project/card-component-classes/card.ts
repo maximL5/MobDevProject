@@ -33,6 +33,10 @@ export class Card {
         if (attack3) this.moveList.push(attack3);
     }
 
+    public getDS(): number {
+        return this.damageScaler;
+    }
+
     private onPoison(): void {
         this.damageOverTime += 1;
     }
@@ -50,7 +54,7 @@ export class Card {
      * @returns True if the card survives the attack, false if it dies.
      */
     receiveDamage(attack: Attack): boolean {
-        this.health -= attack.damage * this.damageScaler;
+        this.health -= (attack.damage * this.damageScaler) + this.damageOverTime;
 
         if (this.health <= 0) {
             return false;

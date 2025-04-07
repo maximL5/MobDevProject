@@ -1,0 +1,73 @@
+
+[
+    {
+        "cardImagePath": "rizzler.png",
+        "name": "THE RIZZLER",
+        "type": "ALPHA",
+        "health": 20,
+        "attack1": { "name": "M'LADY", "damage": 8, "ability": "NONE" },
+        "attack2": { "name": "UNLIMITED RIZZ", "damage": 0, "ability": "VULNERABLE" },
+        "attack3": null,
+        "damageScaler": 1,
+        "damageOverTime": 0,
+        "moveList": [],
+        "effectList": [],
+        "cost": 5
+    },
+    {
+        "cardImagePath": "peaked.png",
+        "name": "PEAKED AT HIGH SCHOOL",
+        "type": "BETA",
+        "health": 29,
+        "attack1": { "name": "FIST BUMP", "damage": 6, "ability": "NONE" },
+        "attack2": { "name": "WHERE MY HUG AT", "damage": 0, "ability": "VULNERABLE" },
+        "attack3": null,
+        "damageScaler": 1,   
+        "damageOverTime": 0,
+        "moveList": [],
+        "effectList": [],
+        "cost": 5
+    },
+    {
+        "cardImagePath": "anime.png",
+        "name": "ANIME WATCHER",
+        "type": "OMEGA",
+        "health": 30,
+        "attack1": { "name": "SAUCE?", "damage": 5, "ability": "NONE" },
+        "attack2": { "name": "GOKU BETTER", "damage": 0, "ability": "POISON" },
+        "attack3": null,
+        "damageScaler": 1,
+        "damageOverTime": 0,
+        "moveList": [],
+        "effectList": [],
+        "cost": 5
+    },
+    {
+        "cardImagePath": "moo-deng.png",
+        "name": "MOO DENG",
+        "type": "SIGMA",
+        "health": 30,
+        "attack1": { "name": "CHOMP", "damage": 7, "ability": "NONE" },
+        "attack2": { "name": "BIG CHOMP", "damage": 0, "ability": "VULNERABLE" },
+        "attack3": null,
+        "damageScaler": 1,
+        "damageOverTime": 0,
+        "moveList": [],
+        "effectList": [],
+        "cost": 5
+    },
+    {
+        "cardImagePath": "morning.png",
+        "name": "MORNING ROUTINE",
+        "type": "SIGMA",
+        "health": 27,
+        "attack1": { "name": "SARATOGA WATER", "damage": 5, "ability": "NONE" },
+        "attack2": { "name": "4 MINUTE DIVE", "damage": 0, "ability": "VULNERABLE" },
+        "attack3": null,
+        "damageScaler": 1,
+        "damageOverTime": 0,
+        "moveList": [],
+        "effectList": [],
+        "cost": 5
+    }
+]
