@@ -7,9 +7,12 @@ import { Ability } from '../card-component-classes/ability';
 import { imageMap } from '../components/image-map';
 import awesomeDeck from '../res/deck.json';
 import suckyDeck from '../res/enemyDeck.json';
+import { useNavigation } from '@react-navigation/native';
+
 
 
 const loadedPlayerDeck: Card[] = [];
+
 
 
 for (const unmadeCard of awesomeDeck) {
@@ -127,7 +130,7 @@ export function BattleScreen() {
     setShowCardPicker(true);
   };
   
-
+  const navigation = useNavigation();
   const handleAttack = (attack: Attack) => {
     if (!playerTurn) return;
 
@@ -144,7 +147,10 @@ export function BattleScreen() {
         setEnemy(newEnemy)
         setEHealth(newEnemy.health);
       } else {
-        Alert.alert('Victory!', 'You defeated the enemy!');
+        Alert.alert('Victory!', 'You defeated the enemy!', [
+          { text: 'OK', onPress: () => navigation.goBack() }
+        ]);
+        
         return;
       }
 
@@ -163,7 +169,9 @@ export function BattleScreen() {
         if (playerDeck.length > 1) {
           pickNewCard();
         } else {
-          Alert.alert('Defeat...', 'You were defeated!');
+          Alert.alert('Defeat...', 'You were defeated!', [
+            { text: 'OK', onPress: () => navigation.goBack() }
+          ]);          
           return;
         }
 
