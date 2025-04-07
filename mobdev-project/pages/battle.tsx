@@ -100,6 +100,8 @@ function getRandomItem<T>(arr: T[]): T {
 export function BattleScreen() {
   
   const [playerTurn, setPlayerTurn] = useState(true);
+  const [showCardPicker, setShowCardPicker] = useState(false);
+
 
   const [playerDeck, setPlayerDeck] = useState<Card[]>(loadedPlayerDeck);
   const [enemyDeck, setEnemyDeck] = useState<Card[]>(loadedEnemyDeck);
@@ -114,21 +116,15 @@ export function BattleScreen() {
 
 
   const updatePlayerCard = (newCard: Card) => {
-    setPlayer(playerDeck[2])
-    setPHealth(player.health);
+    setPlayer(newCard);
+    setPHealth(newCard.health);
+    
   }
 
   const pickNewCard = () => {
-    Alert.alert(
-      "Pick a new card", 
-      "",  
-      [
-        {
-          text: `${playerDeck[2].name}`,
-          onPress: () => updatePlayerCard(playerDeck[2]),
-        },
-      ]
-    );
+    let oldCard = player;
+    setPlayerDeck(prevDeck => prevDeck.filter(card => card.name !== oldCard.name));
+    setShowCardPicker(true);
   };
   
 
@@ -142,6 +138,7 @@ export function BattleScreen() {
       if (enemyDeck.length > 0) {
         setEnemyDeck(prevDeck => prevDeck.filter(card => card.name !== enemy.name))
         setEnemy(getRandomItem(enemyDeck))
+        setEHealth(enemy.health);
       } else {
         Alert.alert('Victory!', 'You defeated the enemy!');
         return;
@@ -218,7 +215,30 @@ export function BattleScreen() {
       <Text style={styles.turnText}>
         {playerTurn ? "Your Turn" : "Enemy's Turn..."}
       </Text>
+
+      {showCardPicker && (
+  <View style={styles.cardPickerOverlay}>
+    <Text style={styles.modalTitle}>Pick a New Card</Text>
+    {playerDeck.map((card, index) => (
+      <TouchableOpacity
+        key={index}
+        style={styles.cardOption}
+        onPress={() => {
+          updatePlayerCard(card);
+          setShowCardPicker(false);
+        }}
+      >
+        <Image source={imageMap[card.cardImagePath]} style={styles.cardOptionImage} />
+        <Text style={styles.cardOptionText}>{card.name}</Text>
+      </TouchableOpacity>
+    ))}
+  </View>
+)}
+
+
+
     </View>
+
   );
 }
 
@@ -285,4 +305,43 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: '#fff',
   },
+
+  cardPickerOverlay: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    height: '100%',
+    width: '100%',
+    backgroundColor: 'rgba(0,0,0,0.9)',
+    padding: 20,
+    zIndex: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  modalTitle: {
+    fontSize: 24,
+    color: 'white',
+    marginBottom: 20,
+    fontWeight: 'bold',
+  },
+  cardOption: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#333',
+    padding: 10,
+    borderRadius: 10,
+    marginBottom: 10,
+    width: '90%',
+  },
+  cardOptionImage: {
+    width: 50,
+    height: 75,
+    borderRadius: 5,
+    marginRight: 10,
+  },
+  cardOptionText: {
+    color: 'white',
+    fontSize: 18,
+  },
+  
 });
