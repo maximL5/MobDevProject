@@ -6,13 +6,13 @@ import { imageMap } from '../components/image-map';
 
 // Sample attacks (replace with real ones if needed)
 const basicAttack: Attack = {
-  name: 'Basic Slash',
-  damage: 10,
+  name: "M'LADY",
+  damage: 8,
   ability: { effect: 0 }
 };
 
 const poisonAttack: Attack = {
-  name: 'Toxic Bite',
+  name: 'UNLIMITED RIZZ',
   damage: 6,
   ability: { effect: 1 }
 };
