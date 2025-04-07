@@ -2,7 +2,7 @@ import { useFonts } from 'expo-font';
 import { Fredoka_400Regular, Fredoka_500Medium, Fredoka_700Bold } from '@expo-google-fonts/fredoka';
 import { StyleSheet, Text, TouchableOpacity, View, Image, ScrollView, Modal } from 'react-native';
 import { useState } from 'react';
-import { imageMap } from '../components/image-map';
+import { cardsData, imageMap } from '../components/image-map';
 import { ownedCardsData } from '../components/image-map';
 import { Card } from '../card-component-classes/card';
 import { CardTypes } from '../card-component-classes/card';
@@ -40,7 +40,7 @@ export const CardsScreen: React.FC = () => {
                 <Image source={require('../assets/cardsBack.png')} style={styles.backIcon} />
               </TouchableOpacity>
             <View style={styles.cardRow}>
-                {ownedCardsData.map((card , i) => (
+                {cardsData.map((card , i) => (
                     <TouchableOpacity key={i} onPress={() => handleCardPress(card)}>
                         <View style={styles.cardItem}>
                             <Image source={imageMap[card.cardImagePath]} style={styles.card} />
@@ -112,7 +112,8 @@ const styles = StyleSheet.create({
         flexWrap: 'wrap',
         justifyContent: 'flex-start',
         paddingTop: 20,
-        marginLeft: 25,
+        paddingBottom: 20,
+        paddingHorizontal: 15,
     },
     cardItem: {
         alignItems: 'center',
