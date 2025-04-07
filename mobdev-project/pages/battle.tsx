@@ -156,7 +156,7 @@ export function BattleScreen() {
       setPHealth(player.health);
 
       if (!playerAlive) {
-        if (playerDeck.length > 0) {
+        if (playerDeck.length > 1) {
           pickNewCard();
         } else {
           Alert.alert('Defeat...', 'You were defeated!');
