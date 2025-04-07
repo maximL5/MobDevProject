@@ -100,8 +100,8 @@ const styles = StyleSheet.create({
         position: 'absolute',
         top: 10,
         left: 10,
-        padding: 10,
-        paddingTop: 50,
+        zIndex: 1,
+        paddingTop: 35,
     },
     backIcon: {
         height: 25,

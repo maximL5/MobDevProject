@@ -29,7 +29,7 @@ export function DeckScreen() {
   const [cards, setCards] = useState<Card[]>([]);
   const [savedDeck, setSavedDeck] = useState<Card[] | null>(null);
 
-  const navigation = useNavigation(); // Initialize the navigation hook
+  const navigation = useNavigation();
 
   useEffect(() => {
     const mappedCards: Card[] = ownedCardsData.map((cardData, index) => {
@@ -140,7 +140,7 @@ const styles = StyleSheet.create({
   },
   backButton: {
     position: 'absolute',
-    top: 20,
+    top: 10,
     left: 10,
     zIndex: 1,
     paddingTop: 35,
