@@ -15,32 +15,35 @@ import { imageMap } from '../components/image-map';
 import { ownedCardsData } from '../components/image-map';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-
-type Card = {
-  id: string;
-  image: any;
-  name: string;
-};
-
+import { Card } from '../card-component-classes/card';
 
 export function DeckScreen() {
   useFonts({
-      FredokaRegular: Fredoka_400Regular,
-      FredokaMedium: Fredoka_500Medium,
-      FredokaBold: Fredoka_700Bold,
+    FredokaRegular: Fredoka_400Regular,
+    FredokaMedium: Fredoka_500Medium,
+    FredokaBold: Fredoka_700Bold,
   });
 
   const [selectedCards, setSelectedCards] = useState<string[]>([]);
   const [cards, setCards] = useState<Card[]>([]);
   const [savedDeck, setSavedDeck] = useState<Card[] | null>(null);
 
-  
   useEffect(() => {
-    const mappedCards: Card[] = ownedCardsData.map((card, index) => ({
-      id: index.toString(),
-      name: card.name,
-      image: imageMap[card.cardImagePath] || require('../assets/cardplaceholder.jpg'),
-    }));
+    const mappedCards: Card[] = ownedCardsData.map((cardData, index) => {
+      const card = new Card(
+        cardData.cardImagePath,
+        cardData.name,
+        cardData.type,
+        cardData.health,
+        cardData.attack1,
+        cardData.attack2,
+        cardData.attack3 ?? null
+      );
+
+      (card as any).id = index.toString();
+
+      return card;
+    });
 
     setCards(mappedCards);
   }, []);
@@ -60,10 +63,10 @@ export function DeckScreen() {
       Alert.alert('Select 5 Cards', 'You must select exactly 5 cards to proceed.');
       return;
     }
-  
-    const selectedDeck = cards.filter(card => selectedCards.includes(card.id));
+
+    const selectedDeck = cards.filter((card) => selectedCards.includes((card as any).id));
     setSavedDeck(selectedDeck);
-  
+
     try {
       await AsyncStorage.setItem('savedDeck', JSON.stringify(selectedDeck));
       Alert.alert('Deck Confirmed', 'Your battle deck is ready!');
@@ -74,14 +77,18 @@ export function DeckScreen() {
   };
 
   const renderCard = ({ item }: { item: Card }) => {
-    const isSelected = selectedCards.includes(item.id);
+    const id = (item as any).id;
+    const isSelected = selectedCards.includes(id);
 
     return (
       <TouchableOpacity
         style={[styles.cardWrapper, isSelected && styles.selectedCard]}
-        onPress={() => toggleCardSelection(item.id)}
+        onPress={() => toggleCardSelection(id)}
       >
-        <Image source={item.image} style={styles.deck} />
+        <Image
+          source={imageMap[item.cardImagePath] || require('../assets/cardplaceholder.jpg')}
+          style={styles.deck}
+        />
         <Text style={styles.cardName}>{item.name}</Text>
       </TouchableOpacity>
     );
@@ -93,13 +100,11 @@ export function DeckScreen() {
       <FlatList
         data={cards}
         renderItem={renderCard}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item) => (item as any).id}
         numColumns={2}
         contentContainerStyle={styles.cardContainer}
       />
-      <Text style={styles.counterText}>
-        Selected: {selectedCards.length}/5
-      </Text>
+      <Text style={styles.counterText}>Selected: {selectedCards.length}/5</Text>
       <TouchableOpacity
         style={[
           styles.confirmButton,
@@ -121,10 +126,6 @@ export function DeckScreen() {
   );
 }
 
-
-
-
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -142,20 +143,6 @@ const styles = StyleSheet.create({
     paddingBottom: 20,
     paddingHorizontal: 10,
     justifyContent: 'center',
-  },
-  cardRow: {
-    flexDirection: 'row',
-    gap: 10,
-    justifyContent: 'center',
-    marginBottom: 10,
-  },
-  button: {
-    borderColor: '#000',
-    borderWidth: 1,
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-    borderRadius: 10,
-    marginTop: 20,
   },
   cardWrapper: {
     backgroundColor: '#fff',
@@ -208,3 +195,4 @@ const styles = StyleSheet.create({
     color: '#444',
   },
 });
+
