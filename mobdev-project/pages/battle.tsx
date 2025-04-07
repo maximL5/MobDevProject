@@ -136,7 +136,10 @@ export function BattleScreen() {
     if (!enemyAlive) {
       if (enemyDeck.length > 0) {
         console.log(enemy.name)
-        setEnemyDeck(prevDeck => prevDeck.filter(card => card.name !== enemy.name))
+        enemyDeck.forEach(
+          card => console.log(card.name)
+        )
+        setEnemyDeck(prevDeck => prevDeck.filter(card => card.name != enemy.name))
         const newEnemy = getRandomItem(enemyDeck)
         setEnemy(newEnemy)
         setEHealth(newEnemy.health);
