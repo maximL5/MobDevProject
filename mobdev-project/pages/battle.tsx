@@ -179,7 +179,7 @@ export function BattleScreen() {
       <Text style={styles.title}>Battle Arena</Text>
 
       <View style={styles.cardRow}>
-        <View style={styles.cardWrapper}>
+        <View style={styles.cardWrapper1}>
           <Image
             source={imageMap[enemy.cardImagePath]}
             style={styles.cardImage}
@@ -189,7 +189,7 @@ export function BattleScreen() {
           <Text style={styles.hp}>HP: {eHealth}</Text>
         </View>
 
-        <View style={styles.cardWrapper}>
+        <View style={styles.cardWrapper2}>
           <Image
             source={imageMap[player.cardImagePath]}
             style={styles.cardImage}
@@ -249,103 +249,141 @@ export function BattleScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#1c1c1c',
+    backgroundColor: '#0e0e0e',
     alignItems: 'center',
-    padding: 20,
+    paddingTop: 100,
   },
   title: {
-    fontSize: 28,
-    color: '#fff',
+    fontSize: 32,
+    color: '#ffda6f',
     marginVertical: 20,
-    fontWeight: 'bold',
+    fontWeight: '900',
+    letterSpacing: 1,
+    textShadowColor: '#000',
+    textShadowOffset: { width: 1, height: 1 },
+    textShadowRadius: 2,
   },
   cardRow: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'space-evenly',
     width: '100%',
+    marginBottom: 30,
   },
-  cardWrapper: {
+  cardWrapper1: {
     alignItems: 'center',
-    flex: 1,
+    padding: 10,
+    backgroundColor: '#ff5f56',
+    borderRadius: 15,
+    marginHorizontal: 10,
+    shadowColor: '#000',
+    shadowOpacity: 0.8,
+    shadowOffset: { width: 0, height: 4 },
+    shadowRadius: 6,
+    elevation: 8,
+  },
+  cardWrapper2: {
+    alignItems: 'center',
+    padding: 10,
+    backgroundColor: '#43A047',
+    borderRadius: 15,
+    marginHorizontal: 10,
+    shadowColor: '#000',
+    shadowOpacity: 0.8,
+    shadowOffset: { width: 0, height: 4 },
+    shadowRadius: 6,
+    elevation: 8,
   },
   cardImage: {
-    width: 130,
+    width: 140,
     height: 200,
     borderRadius: 10,
     marginBottom: 10,
   },
   cardName: {
-    fontSize: 18,
+    fontSize: 20,
     fontWeight: 'bold',
-    color: 'white',
+    color: '#ffffff',
+    marginTop: 5,
   },
   hp: {
-    color: 'lime',
-    marginTop: 5,
+    color: '#3eff3e',
     fontSize: 16,
+    fontWeight: '600',
   },
   attackButtons: {
-    marginTop: 30,
+    marginTop: 10,
     width: '100%',
     alignItems: 'center',
   },
   attackButton: {
-    backgroundColor: '#444',
-    padding: 12,
-    marginVertical: 6,
-    borderRadius: 10,
-    width: '80%',
+    backgroundColor: '#4444dd',
+    paddingVertical: 14,
+    paddingHorizontal: 20,
+    marginVertical: 8,
+    borderRadius: 12,
+    width: '85%',
+    shadowColor: '#4444dd',
+    shadowOpacity: 0.5,
+    shadowOffset: { width: 0, height: 3 },
+    shadowRadius: 5,
+    elevation: 6,
   },
   attackText: {
     color: 'white',
     textAlign: 'center',
-    fontSize: 16,
+    fontSize: 18,
+    fontWeight: '600',
+    textTransform: 'uppercase',
   },
   disabledButton: {
-    backgroundColor: '#777',
+    backgroundColor: '#555',
+    opacity: 0.5,
   },
   turnText: {
-    marginTop: 20,
-    fontSize: 18,
-    color: '#fff',
+    marginTop: 25,
+    fontSize: 20,
+    color: '#ffcc00',
+    fontWeight: 'bold',
   },
-
   cardPickerOverlay: {
     position: 'absolute',
     top: 0,
     left: 0,
     height: '100%',
     width: '100%',
-    backgroundColor: 'rgba(0,0,0,0.9)',
+    backgroundColor: 'rgba(0, 0, 0, 0.95)',
     padding: 20,
     zIndex: 10,
     justifyContent: 'center',
     alignItems: 'center',
   },
   modalTitle: {
-    fontSize: 24,
-    color: 'white',
+    fontSize: 26,
+    color: '#ffffff',
     marginBottom: 20,
     fontWeight: 'bold',
+    textAlign: 'center',
   },
   cardOption: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#333',
-    padding: 10,
+    backgroundColor: '#2a2a2a',
+    padding: 12,
     borderRadius: 10,
-    marginBottom: 10,
+    marginBottom: 12,
     width: '90%',
+    borderWidth: 1,
+    borderColor: '#555',
   },
   cardOptionImage: {
-    width: 50,
-    height: 75,
-    borderRadius: 5,
-    marginRight: 10,
+    width: 60,
+    height: 85,
+    borderRadius: 6,
+    marginRight: 12,
   },
   cardOptionText: {
-    color: 'white',
-    fontSize: 18,
+    color: '#ffffff',
+    fontSize: 20,
+    fontWeight: '500',
   },
-  
 });
