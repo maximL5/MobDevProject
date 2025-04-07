@@ -21,10 +21,40 @@ const poisonAttack: Attack = {
 const playerCard = new Card('rizzler.png', 'Rizzler', 0, 100, basicAttack, poisonAttack);
 const enemyCard = new Card('peaked.png', 'Peaked', 1, 100, poisonAttack, basicAttack);
 
+function getRandomItem<T>(arr: T[]): T {
+  const randomIndex = Math.floor(Math.random() * arr.length);
+  return arr[randomIndex];
+}
+
+
+
 export function BattleScreen() {
   const [player, setPlayer] = useState<Card>(playerCard);
   const [enemy, setEnemy] = useState<Card>(enemyCard);
   const [playerTurn, setPlayerTurn] = useState(true);
+
+  const [playerDeck, setPlayerDeck] = useState<Card[]>([]);
+  const [enemyDeck, setEnemyDeck] = useState<Card[]>([]);
+
+
+
+  const updatePlayerCard = (newCard: Card) => {
+    setPlayer(new Card('gigachad.png', 'gigachad', 2, 100, basicAttack, poisonAttack))
+  }
+
+  const pickNewCard = () => {
+    Alert.alert(
+      "Pick a new card", 
+      "",  
+      [
+        {
+          text: "Card 1",
+          onPress: () => updatePlayerCard,
+        },
+      ]
+    );
+  };
+  
 
   const handleAttack = (attack: Attack) => {
     if (!playerTurn) return;
@@ -41,11 +71,21 @@ export function BattleScreen() {
     ));
 
     if (!enemyAlive) {
-      Alert.alert('Victory!', 'You defeated the enemy!');
-      return;
+      if (enemyDeck.length > 0) {
+        setEnemyDeck(prevDeck => prevDeck.filter(card => card.name !== enemy.name))
+        getRandomItem(enemyDeck)
+      } else {
+        Alert.alert('Victory!', 'You defeated the enemy!');
+        return;
+      }
+
+      
     }
 
     setPlayerTurn(false);
+
+
+
 
     setTimeout(() => {
       const enemyAttack = Math.random() < 0.5 ? enemy.attack1 : enemy.attack2;
@@ -61,8 +101,14 @@ export function BattleScreen() {
       ));
 
       if (!playerAlive) {
-        Alert.alert('Defeat...', 'You were defeated!');
-        return;
+        if (playerDeck.length > 0) {
+          pickNewCard();
+        } else {
+          Alert.alert('Defeat...', 'You were defeated!');
+          return;
+        }
+
+        
       }
 
       setPlayerTurn(true);
