@@ -8,29 +8,43 @@ import { imageMap } from '../components/image-map';
 import awesomeDeck from '../res/deck.json';
 import suckyDeck from '../res/enemyDeck.json';
 
-// Sample attacks (replace with real ones if needed)
-const basicAttack: Attack = {
-  name: "M'LADY",
-  damage: 8,
-  ability: new Ability(EffectTypes.NONE)
-};
-
-const poisonAttack: Attack = {
-  name: 'UNLIMITED RIZZ',
-  damage: 1,
-  ability: new Ability(EffectTypes.VULNERABLE)
-};
-
-// Sample cards for battle (replace with dynamic ones later)
-const playerCard = new Card('rizzler.png', 'Rizzler', 0, 100, basicAttack, poisonAttack);
-const enemyCard = new Card('peaked.png', 'Peaked', 1, 100, poisonAttack, basicAttack);
-
 
 const loadedPlayerDeck: Card[] = [];
 
 
 for (const unmadeCard of awesomeDeck) {
   const newCard = createCard(unmadeCard);
+
+
+  if (unmadeCard.attack1.ability == "NONE") {
+    newCard.attack1.setAbility(EffectTypes.NONE)
+  }
+
+  if (unmadeCard.attack1.ability == "VULNERABLE") {
+    newCard.attack1.setAbility(EffectTypes.VULNERABLE)
+  }
+
+  if (unmadeCard.attack1.ability == "POISON") {
+    newCard.attack1.setAbility(EffectTypes.POISON)
+  }
+
+
+
+  if (unmadeCard.attack2.ability == "NONE") {
+    newCard.attack2.setAbility(EffectTypes.NONE)
+  }
+
+  if (unmadeCard.attack2.ability == "VULNERABLE") {
+    newCard.attack2.setAbility(EffectTypes.VULNERABLE)
+  }
+
+  if (unmadeCard.attack2.ability == "POISON") {
+    newCard.attack2.setAbility(EffectTypes.POISON)
+  }
+
+
+
+
   loadedPlayerDeck.push(newCard);
 }
 
@@ -39,6 +53,39 @@ const loadedEnemyDeck: Card[] = [];
 
 for (const unmadeCard of suckyDeck) {
   const newCard = createCard(unmadeCard);
+
+  
+  if (unmadeCard.attack1.ability == "NONE") {
+    newCard.attack1.setAbility(EffectTypes.NONE)
+  }
+
+  if (unmadeCard.attack1.ability == "VULNERABLE") {
+    newCard.attack1.setAbility(EffectTypes.VULNERABLE)
+  }
+
+  if (unmadeCard.attack1.ability == "POISON") {
+    newCard.attack1.setAbility(EffectTypes.POISON)
+  }
+
+  if (unmadeCard.attack2 == null) {
+    newCard.setAttack2(newCard.attack1);
+  }
+
+  if (unmadeCard.attack2 != null) {
+    if (unmadeCard.attack2.ability == "NONE") {
+    newCard.attack2.setAbility(EffectTypes.NONE)
+    }
+
+    if (unmadeCard.attack2.ability == "VULNERABLE") {
+      newCard.attack2.setAbility(EffectTypes.VULNERABLE)
+    }
+
+    if (unmadeCard.attack2.ability == "POISON") {
+      newCard.attack2.setAbility(EffectTypes.POISON)
+    }
+  }
+  
+
   loadedEnemyDeck.push(newCard);
 }
 
@@ -61,13 +108,14 @@ export function BattleScreen() {
   const [enemy, setEnemy] = useState<Card>(enemyDeck[0]);
 
 
-  const [pHealth, setPHealth] = useState<number>(playerCard.health);
-  const [eHealth, setEHealth] = useState<number>(enemyCard.health);
+  const [pHealth, setPHealth] = useState<number>(player.health);
+  const [eHealth, setEHealth] = useState<number>(enemy.health);
 
 
 
   const updatePlayerCard = (newCard: Card) => {
-    setPlayer(new Card('gigachad.png', 'gigachad', 2, 100, basicAttack, poisonAttack))
+    setPlayer(playerDeck[2])
+    setPHealth(player.health);
   }
 
   const pickNewCard = () => {

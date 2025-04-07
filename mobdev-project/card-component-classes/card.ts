@@ -33,8 +33,8 @@ export class Card {
         if (attack3) this.moveList.push(attack3);
     }
 
-    public getDS(): number {
-        return this.damageScaler;
+    public setAttack2(attack: Attack) {
+        this.attack2 = attack
     }
 
     private onPoison(): void {

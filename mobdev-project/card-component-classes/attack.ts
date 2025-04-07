@@ -8,6 +8,10 @@ export class Attack {
         public damage: number, 
         public ability: Ability = new Ability(EffectTypes.NONE)) {
     }
+
+    public setAbility(effect: EffectTypes) {
+        this.ability = new Ability(effect);
+    }
 }
 
 export function createAttack(attackData: any): Attack | null {
