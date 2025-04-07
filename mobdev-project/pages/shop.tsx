@@ -56,7 +56,7 @@ const Shop: React.FC = () => {
     <View style={styles.shopWrapper}>
       <View style={styles.cardGrid}>
         {visibleCards.map((card, index) => (
-          <View key={index} style={styles.cardContainer}>
+          <TouchableOpacity key={index} style={styles.cardContainer}>
             <Image
               source={imageMap[card.cardImagePath]}
               style={styles.cardImage}
@@ -64,7 +64,7 @@ const Shop: React.FC = () => {
             />
             <Text style={styles.cardName}>{card.name}</Text>
             <Text style={styles.cardType}>Type: {CardTypes[card.type]}</Text>
-          </View>
+          </TouchableOpacity>
         ))}
       </View>
 
@@ -159,7 +159,6 @@ const styles = StyleSheet.create({
   },
 
   purchaseWrapper: {
-    marginTop: 30,
     width: '90%',
     alignItems: 'flex-end',
   },
