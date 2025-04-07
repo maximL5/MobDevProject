@@ -2,7 +2,11 @@ import { useFonts } from 'expo-font';
 import { Fredoka_400Regular, Fredoka_500Medium, Fredoka_700Bold } from '@expo-google-fonts/fredoka';
 import { StyleSheet, Text, TouchableOpacity, View, Image, ScrollView, Modal } from 'react-native';
 import { useState } from 'react';
-import { imageMap, ownedCardsData } from '../components/image-map';
+import { imageMap } from '../components/image-map';
+import { ownedCardsData } from '../components/image-map';
+import { Card } from '../card-component-classes/card';
+import { CardTypes } from '../card-component-classes/card';
+import { EffectTypes } from '../card-component-classes/effecttypes';
 
 export const CardsScreen: React.FC = () => {
     useFonts({
@@ -10,12 +14,6 @@ export const CardsScreen: React.FC = () => {
         FredokaMedium: Fredoka_500Medium,
         FredokaBold: Fredoka_700Bold,
       });
-
-    type Card = {
-        cardImagePath: any;
-        name: string;
-        type: any;
-      };
 
     const [modalVisible, setModalVisible] = useState(false);
     const [selectedCard, setSelectedCard] = useState<Card | null>(null);
@@ -35,12 +33,13 @@ export const CardsScreen: React.FC = () => {
     return (
         <ScrollView contentContainerStyle={styles.scrollContainer}>
             <View style={styles.cardRow}>
-                {ownedCardsData.map((card, index) => (
-                    <TouchableOpacity key={index} onPress={() => handleCardPress(card)}>
+                {ownedCardsData.map((card , i) => (
+                    <TouchableOpacity key={i} onPress={() => handleCardPress(card)}>
                         <View style={styles.cardItem}>
                             <Image source={imageMap[card.cardImagePath]} style={styles.card} />
                             <Text style={styles.cardName}>{card.name}</Text>
-                            <Text>Type: {card.type}</Text>
+                            <Text>Type: {CardTypes[card.type]}</Text>
+
                         </View>
                     </TouchableOpacity>
                 ))}
@@ -59,9 +58,21 @@ export const CardsScreen: React.FC = () => {
                                 <Image source={imageMap[selectedCard.cardImagePath]} style={styles.modalImage}
                                 />
                                 <Text style={styles.modalCardName}>{selectedCard.name}</Text>
-                                <Text style={styles.modalText}>Type: {selectedCard.type}</Text>
+                                <Text style={styles.modalText}>Type: {CardTypes[selectedCard.type]} | Health: {[selectedCard.health]}</Text>
+
+                                <Text style={styles.modalText}>
+                                    Attack 1: {[selectedCard.attack1.name]} | Damage: {[selectedCard.attack1.damage]} | 
+                                    Effect: {selectedCard.attack1 ? EffectTypes[selectedCard.attack1.ability.effect] : "N/A"}
+                                </Text>
+                                <Text style={styles.modalText}>
+                                    Attack 2: {selectedCard.attack2 ? selectedCard.attack2.name : "N/A"} | Damage: {selectedCard.attack2 ? selectedCard.attack2.damage : "N/A"} | 
+                                    Effect: {selectedCard.attack2 ? EffectTypes[selectedCard.attack2.ability.effect] : "N/A"}
+                                </Text>
+                                <Text style={styles.modalText}>
+                                
+                                </Text>
                                 <TouchableOpacity style={styles.closeButton} onPress={handleCloseModal}>
-                                    <Text style={styles.closeButtonText}>Close</Text>
+                                    <Text style={styles.closeButtonText}>CLOSE</Text>
                                 </TouchableOpacity>
                             </>
                         )}

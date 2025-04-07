@@ -1,3 +1,6 @@
+import { createAttack } from './attack';
+import { Attack } from './attack';
+import { EffectTypes } from './effecttypes';
 
 export enum CardTypes{
     ALPHA,
@@ -63,4 +66,34 @@ export class Card {
 
         return true;
     }
+
 }
+
+export function mapCardType(typeString: string): CardTypes {
+    switch (typeString.toUpperCase()) {
+      case 'ALPHA': return CardTypes.ALPHA;
+      case 'BETA': return CardTypes.BETA;
+      case 'SIGMA': return CardTypes.SIGMA;
+      case 'OMEGA': return CardTypes.OMEGA;
+      default: throw new Error(`Unknown card type: ${typeString}`);
+    }
+  }
+
+export function createCard(cardData: any): Card {
+    return new Card(
+        cardData.cardImagePath,
+        cardData.name,
+        mapCardType(cardData.type),
+        cardData.health,
+        createAttack(cardData.attack1)!,
+        createAttack(cardData.attack2)!,
+        createAttack(cardData.attack3)!,
+        cardData.damageScaler ?? 1,
+        cardData.damageOverTime ?? 0,
+        [],
+        cardData.effectList?.map((effect: string) => mapCardType(cardData.type)) ?? []
+    );
+}
+
+
+

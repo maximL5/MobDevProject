@@ -83,7 +83,7 @@
             "name": "ELITE EMPLOYEE",
             "type": "OMEGA",
             "health": 30,
-            "attack1": { "name": "PROMOTION", "damage": 0, "ability": "NONE" },
+            "attack1": { "name": "PROMOTION", "damage": 10, "ability": "NONE" },
             "attack2": null,
             "attack3": null,
             "damageScaler": 1,

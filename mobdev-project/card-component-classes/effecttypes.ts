@@ -1,5 +1,5 @@
 
-enum EffectTypes {
+export enum EffectTypes {
     NONE,
     VULNERABLE,
     POISON

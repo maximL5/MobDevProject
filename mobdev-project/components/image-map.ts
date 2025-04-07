@@ -1,8 +1,11 @@
 import cardsList from '../res/cards.json';
 import ownedCardsList from '../res/owned-cards.json';
 
-export const cardsData = cardsList.cards;
-export const ownedCardsData = ownedCardsList.ownedCards;
+// export const cardsData = cardsList.cards;
+// export const ownedCardsData = ownedCardsList.ownedCards;
+
+import { createCard } from "../card-component-classes/card";
+
 
 export const imageMap: Record<string, any> = {
     "rizzler.png": require("../assets/images/rizzler.png"),
@@ -18,3 +21,7 @@ export const imageMap: Record<string, any> = {
     "giga.png": require("../assets/images/giga.png"),
     "elite.png": require("../assets/images/elite.png")
 };
+
+export const cardsData = cardsList.cards.map(createCard);
+export const ownedCardsData = ownedCardsList.ownedCards.map(createCard);
+

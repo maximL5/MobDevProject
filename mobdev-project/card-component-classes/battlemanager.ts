@@ -1,6 +1,8 @@
 
 import { Card, CardTypes } from "./card";
-
+import { Attack } from "./attack";
+import { EffectTypes } from "./effecttypes";
+import { Ability } from "./ability";
 
 export class BattleManager {
 

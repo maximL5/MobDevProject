@@ -11,7 +11,8 @@ import {
   Alert,
 } from 'react-native';
 
-import { imageMap, ownedCardsData } from '../components/image-map';
+import { imageMap } from '../components/image-map';
+import { ownedCardsData } from '../components/image-map';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
