@@ -4,6 +4,7 @@ import { StyleSheet, Text, TouchableOpacity, View, Image } from 'react-native';
 import { useState } from 'react';
 import { imageMap } from '../components/image-map';
 import { cardsData } from '../components/image-map';
+import { CardTypes } from '../card-component-classes/card';
 
 
 const coins = 0;
@@ -42,8 +43,7 @@ const Shop: React.FC = () => {
             <View key={index} style={{ alignItems: 'center', margin: 10 }}>
               <Image source={imageMap[card.cardImagePath]} style={styles.card} />
               <Text style={{ fontWeight: 'bold' }}>{card.name}</Text>
-              <Text>Type: {card.type}</Text>
-              {/* <Text>Cost: {card.cost} coins</Text> */}
+              <Text>Type: {CardTypes[card.type]}</Text>
             </View>
           ))}
           <View>
