@@ -132,13 +132,17 @@ export function BattleScreen() {
     if (!playerTurn) return;
 
     const enemyAlive = enemy.receiveDamage(attack);
-    setEHealth(enemy.health)
-
+    setEHealth(enemy.health);
     if (!enemyAlive) {
       if (enemyDeck.length > 0) {
-        setEnemyDeck(prevDeck => prevDeck.filter(card => card.name !== enemy.name))
-        setEnemy(getRandomItem(enemyDeck))
-        setEHealth(enemy.health);
+        console.log(enemy.name)
+        enemyDeck.forEach(
+          card => console.log(card.name)
+        )
+        setEnemyDeck(prevDeck => prevDeck.filter(card => card.name != enemy.name))
+        const newEnemy = getRandomItem(enemyDeck)
+        setEnemy(newEnemy)
+        setEHealth(newEnemy.health);
       } else {
         Alert.alert('Victory!', 'You defeated the enemy!');
         return;

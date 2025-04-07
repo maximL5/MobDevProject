@@ -5,7 +5,7 @@
     "name": "SMITE KNIFE",
     "type": "ALPHA",
     "health": 40,
-    "attack1": { "name": "GET SMITED", "damage": 10, "ability": "NONE" },
+    "attack1": { "name": "GET SMITED", "damage": 8, "ability": "NONE" },
     "attack2": null,
     "attack3": null,
     "damageScaler": 1,
