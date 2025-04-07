@@ -1,0 +1,55 @@
+
+[
+{
+    "cardImagePath": "smite.png",
+    "name": "SMITE KNIFE",
+    "type": "ALPHA",
+    "health": 40,
+    "attack1": { "name": "GET SMITED", "damage": 10, "ability": "NONE" },
+    "attack2": null,
+    "attack3": null,
+    "damageScaler": 1,
+    "damageOverTime": 0,
+    "moveList": [],
+    "effectList": []
+},
+{
+    "cardImagePath": "chill.png",
+    "name": "CHILL GUY",
+    "type": "SIGMA",
+    "health": 20,
+    "attack1": { "name": "*insert piano melody*", "damage": 6, "ability": "NONE" },
+    "attack2": { "name": "HE LOWKEY DONT GAF", "damage": 3, "ability": "VULNERABLE" },
+    "attack3": null,
+    "damageScaler": 1,
+    "damageOverTime": 0,
+    "moveList": [],
+    "effectList": []
+},
+{
+    "cardImagePath": "giga.png",
+    "name": "GIGACHAD",
+    "type": "ALPHA",
+    "health": 30,
+    "attack1": { "name": "MOG", "damage": 5, "ability": "NONE" },
+    "attack2": { "name": "LOOKSMAXX", "damage": 0, "ability": "VULNERABLE" },
+    "attack3": null,
+    "damageScaler": 1,
+    "damageOverTime": 0,
+    "moveList": [],
+    "effectList": []
+},
+{
+    "cardImagePath": "elite.png",
+    "name": "ELITE EMPLOYEE",
+    "type": "OMEGA",
+    "health": 30,
+    "attack1": { "name": "PROMOTION", "damage": 10, "ability": "NONE" },
+    "attack2": { "name": "PROMOTION", "damage": 10, "ability": "NONE" },
+    "attack3": null,
+    "damageScaler": 1,
+    "damageOverTime": 0,
+    "moveList": [],
+    "effectList": []
+}
+]

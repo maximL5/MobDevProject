@@ -1,25 +1,47 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet, Alert } from 'react-native';
-import { Card } from '../card-component-classes/card';
+import { Card, createCard } from '../card-component-classes/card';
 import { Attack } from '../card-component-classes/attack';
+import { EffectTypes } from '../card-component-classes/effecttypes';
+import { Ability } from '../card-component-classes/ability';
 import { imageMap } from '../components/image-map';
+import awesomeDeck from '../res/deck.json';
+import suckyDeck from '../res/enemyDeck.json';
 
 // Sample attacks (replace with real ones if needed)
 const basicAttack: Attack = {
   name: "M'LADY",
   damage: 8,
-  ability: { effect: 0 }
+  ability: new Ability(EffectTypes.NONE)
 };
 
 const poisonAttack: Attack = {
   name: 'UNLIMITED RIZZ',
-  damage: 6,
-  ability: { effect: 1 }
+  damage: 1,
+  ability: new Ability(EffectTypes.VULNERABLE)
 };
 
 // Sample cards for battle (replace with dynamic ones later)
 const playerCard = new Card('rizzler.png', 'Rizzler', 0, 100, basicAttack, poisonAttack);
 const enemyCard = new Card('peaked.png', 'Peaked', 1, 100, poisonAttack, basicAttack);
+
+
+const loadedPlayerDeck: Card[] = [];
+
+
+for (const unmadeCard of awesomeDeck) {
+  const newCard = createCard(unmadeCard);
+  loadedPlayerDeck.push(newCard);
+}
+
+const loadedEnemyDeck: Card[] = [];
+
+
+for (const unmadeCard of suckyDeck) {
+  const newCard = createCard(unmadeCard);
+  loadedEnemyDeck.push(newCard);
+}
+
 
 function getRandomItem<T>(arr: T[]): T {
   const randomIndex = Math.floor(Math.random() * arr.length);
@@ -29,12 +51,18 @@ function getRandomItem<T>(arr: T[]): T {
 
 
 export function BattleScreen() {
-  const [player, setPlayer] = useState<Card>(playerCard);
-  const [enemy, setEnemy] = useState<Card>(enemyCard);
+  
   const [playerTurn, setPlayerTurn] = useState(true);
 
-  const [playerDeck, setPlayerDeck] = useState<Card[]>([]);
-  const [enemyDeck, setEnemyDeck] = useState<Card[]>([]);
+  const [playerDeck, setPlayerDeck] = useState<Card[]>(loadedPlayerDeck);
+  const [enemyDeck, setEnemyDeck] = useState<Card[]>(loadedEnemyDeck);
+
+  const [player, setPlayer] = useState<Card>(playerDeck[0]);
+  const [enemy, setEnemy] = useState<Card>(enemyDeck[0]);
+
+
+  const [pHealth, setPHealth] = useState<number>(playerCard.health);
+  const [eHealth, setEHealth] = useState<number>(enemyCard.health);
 
 
 
@@ -48,8 +76,8 @@ export function BattleScreen() {
       "",  
       [
         {
-          text: "Card 1",
-          onPress: () => updatePlayerCard,
+          text: `${playerDeck[2].name}`,
+          onPress: () => updatePlayerCard(playerDeck[2]),
         },
       ]
     );
@@ -60,20 +88,12 @@ export function BattleScreen() {
     if (!playerTurn) return;
 
     const enemyAlive = enemy.receiveDamage(attack);
-    setEnemy(new Card(
-      enemy.cardImagePath,
-      enemy.name,
-      enemy.type,
-      enemy.health,
-      enemy.attack1,
-      enemy.attack2,
-      enemy.attack3
-    ));
+    setEHealth(enemy.health)
 
     if (!enemyAlive) {
       if (enemyDeck.length > 0) {
         setEnemyDeck(prevDeck => prevDeck.filter(card => card.name !== enemy.name))
-        getRandomItem(enemyDeck)
+        setEnemy(getRandomItem(enemyDeck))
       } else {
         Alert.alert('Victory!', 'You defeated the enemy!');
         return;
@@ -85,20 +105,10 @@ export function BattleScreen() {
     setPlayerTurn(false);
 
 
-
-
     setTimeout(() => {
       const enemyAttack = Math.random() < 0.5 ? enemy.attack1 : enemy.attack2;
       const playerAlive = player.receiveDamage(enemyAttack);
-      setPlayer(new Card(
-        player.cardImagePath,
-        player.name,
-        player.type,
-        player.health,
-        player.attack1,
-        player.attack2,
-        player.attack3
-      ));
+      setPHealth(player.health);
 
       if (!playerAlive) {
         if (playerDeck.length > 0) {
@@ -127,7 +137,7 @@ export function BattleScreen() {
             resizeMode="contain"
           />
           <Text style={styles.cardName}>{enemy.name}</Text>
-          <Text style={styles.hp}>HP: {enemy.health}</Text>
+          <Text style={styles.hp}>HP: {eHealth}</Text>
         </View>
 
         <View style={styles.cardWrapper}>
@@ -137,7 +147,7 @@ export function BattleScreen() {
             resizeMode="contain"
           />
           <Text style={styles.cardName}>{player.name}</Text>
-          <Text style={styles.hp}>HP: {player.health}</Text>
+          <Text style={styles.hp}>HP: {pHealth}</Text>
         </View>
       </View>
 
