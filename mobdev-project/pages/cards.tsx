@@ -7,6 +7,9 @@ import { ownedCardsData } from '../components/image-map';
 import { Card } from '../card-component-classes/card';
 import { CardTypes } from '../card-component-classes/card';
 import { EffectTypes } from '../card-component-classes/effecttypes';
+import { useNavigation } from '@react-navigation/native';
+
+
 
 export const CardsScreen: React.FC = () => {
     useFonts({
@@ -17,7 +20,7 @@ export const CardsScreen: React.FC = () => {
 
     const [modalVisible, setModalVisible] = useState(false);
     const [selectedCard, setSelectedCard] = useState<Card | null>(null);
-    
+    const navigation = useNavigation();
 
     const handleCardPress = (card: Card) => {
         setSelectedCard(card);
@@ -32,6 +35,10 @@ export const CardsScreen: React.FC = () => {
 
     return (
         <ScrollView contentContainerStyle={styles.scrollContainer}>
+              {/* Back Button */}
+              <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backButton}>
+                <Image source={require('../assets/cardsBack.png')} style={styles.backIcon} />
+              </TouchableOpacity>
             <View style={styles.cardRow}>
                 {ownedCardsData.map((card , i) => (
                     <TouchableOpacity key={i} onPress={() => handleCardPress(card)}>
@@ -87,6 +94,18 @@ const styles = StyleSheet.create({
     scrollContainer: {
         flexGrow: 1,
         paddingBottom: 20,
+        paddingTop: 80,
+    },
+    backButton: {
+        position: 'absolute',
+        top: 10,
+        left: 10,
+        padding: 10,
+        paddingTop: 50,
+    },
+    backIcon: {
+        height: 25,
+        width: 117,
     },
     cardRow: {
         flexDirection: 'row',

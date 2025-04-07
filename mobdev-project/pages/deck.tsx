@@ -10,6 +10,7 @@ import {
   FlatList,
   Alert,
 } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 import { imageMap } from '../components/image-map';
 import { ownedCardsData } from '../components/image-map';
@@ -27,6 +28,8 @@ export function DeckScreen() {
   const [selectedCards, setSelectedCards] = useState<string[]>([]);
   const [cards, setCards] = useState<Card[]>([]);
   const [savedDeck, setSavedDeck] = useState<Card[] | null>(null);
+
+  const navigation = useNavigation(); // Initialize the navigation hook
 
   useEffect(() => {
     const mappedCards: Card[] = ownedCardsData.map((cardData, index) => {
@@ -96,6 +99,11 @@ export function DeckScreen() {
 
   return (
     <View style={styles.container}>
+      {/* Back Button */}
+      <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backButton}>
+        <Image source={require('../assets/deckBack.png')} style={styles.backIcon} />
+      </TouchableOpacity>
+
       <Text style={styles.chooseText}>Pick exactly 5 cards for your deck</Text>
       <FlatList
         data={cards}
@@ -106,10 +114,7 @@ export function DeckScreen() {
       />
       <Text style={styles.counterText}>Selected: {selectedCards.length}/5</Text>
       <TouchableOpacity
-        style={[
-          styles.confirmButton,
-          selectedCards.length === 5 ? styles.confirmEnabled : styles.confirmDisabled,
-        ]}
+        style={[styles.confirmButton, selectedCards.length === 5 ? styles.confirmEnabled : styles.confirmDisabled]}
         onPress={confirmDeck}
         disabled={selectedCards.length !== 5}
       >
@@ -131,7 +136,18 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
-    paddingTop: 10,
+    paddingTop: 100,
+  },
+  backButton: {
+    position: 'absolute',
+    top: 20,
+    left: 10,
+    zIndex: 1,
+    paddingTop: 35,
+  },
+  backIcon: {
+    width: 105,
+    height: 21,
   },
   chooseText: {
     fontFamily: 'FredokaRegular',
@@ -195,4 +211,3 @@ const styles = StyleSheet.create({
     color: '#444',
   },
 });
-

@@ -50,14 +50,9 @@ function HomeScreen({ navigation, route }: { navigation: any; route: any }) {
 
 export default function App() {
   return (
-    <View style={{ flex: 1, backgroundColor: 'white' }}>
+    <View style={{ flex: 1, backgroundColor: 'white'}}>
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{
-        headerStyle: {
-          backgroundColor: 'white', 
-          elevation: 0, 
-        },
-      }}>
+      <Stack.Navigator screenOptions={{ headerShown: false }}>
         <Stack.Screen 
           name="SignIn" 
           component={SignInScreen} 
