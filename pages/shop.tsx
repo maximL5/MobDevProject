@@ -17,7 +17,7 @@ import { useNavigation } from '@react-navigation/native';
 import { imageMap, cardsData } from '../components/image-map';
 import { CardTypes } from '../card-component-classes/card';
 
-const coins = 0;
+const coins = 10000;
 const resetAmount = 0;
 const totalCost = 0;
 
